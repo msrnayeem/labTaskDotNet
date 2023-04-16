@@ -128,5 +128,28 @@ namespace AppLayer.Controllers
 
             }
         }
+        [HttpGet]
+        [Route("api/member/GetMemberDAF")]
+        public HttpResponseMessage GetMemberDAF(int id)
+        {
+            try
+            {
+                var data = MemberService.Get(id);
+                if (data!= null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK,data);
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, "not found");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
+
+            }
+        }
     }
 }

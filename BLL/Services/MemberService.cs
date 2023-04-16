@@ -1,4 +1,5 @@
 ﻿using BLL.DTOs;
+using DAL;
 using DAL.CodeFirst;
 using DAL.Repos;
 using System;
@@ -62,9 +63,15 @@ namespace BLL.Services
                 Role = member.Role
             };
         }
-        static List<MemberDTO> Convert(List<Member> news)
+        static List<MemberDTO> Convert(List<Member> member)
         {
-            return news.Select(x => Convert(x)).ToList();
+            return member.Select(x => Convert(x)).ToList();
+        }
+
+        //INTERFACE
+        public static MemberDTO Get(int id)
+        {
+            return Convert(DataAccessFactory.MemberData().Get(id));
         }
     }
 }
